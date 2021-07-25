@@ -46,7 +46,7 @@
             width: 97%;
             align-self: center;
             background-color: rgb(255, 13, 13);
-            background-image: url('img/serraangel.png');
+            background-image: url('');
             background-repeat: no-repeat;
             background-size: cover;
             flex: 60%;
@@ -54,9 +54,9 @@
             border-right: 3px solid white;
             border-radius: 4px;
             box-shadow: -9px 1px 4px -5px rgba(0,0,0,0.23);        }
-        .borda{
+            .borda{
             background-color: wheat;
-            background-image: url('ourotex.jpg');
+            background-image: url("ourotex.jpg");
             background-repeat: no-repeat;
             background-size: cover;
             padding: 2%;
@@ -155,7 +155,7 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            top: -8vh;
+            top: -5%;
             color: white;
             font-size: 70%;
             font-weight: bolder;
@@ -167,57 +167,64 @@
     </style>
 </head>
 <body>
-    <div class="carta">
-        <!-- borda da classe corpo = dourada -->
-        <div class="borda">
-        <div class="corpo">
-            <div class="header">
-                <div class="bordaext"> 
-                <p class="titulo">Serra Angel</p>
-                <div class="elementos">
-                    <span style="font-size: 150%;">]</span>
-                    <img src="img/manacost.png">
-                    <img src="img/manacost.png">
-                </div>
-            </div>
-            </div>
-            <div class="imagem"><p></p></div>
-            <div class="type">
-                <div class="bordaext"> 
-                    <p class="titulo">Creature - Angel</p>
-                    <img src="img/serraangelexpansionsymbol.png" class="imgs">
-                </div>
-            </div>
-            <div class="descricao">
-                <h3 class="titulo">Flying Vigilance</h3>
-                <hr>
-                <p class="conteudo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam aut, veritatis, quis excepturi quod velit sapiente doloribus officiis eligendi repellat consequatur odit molestiae, ullam dolores illo similique. Rerum, quod expedita.</p>
-                <div class="numcont"></div>
-            </div>
-        </div>
-            <div class="power">
-                <div class="branco">
-                    <div class="num"><p class="par">4/4</p></div>
-                </div>
-            </div>
-            <div class="footer"></div>
-            <div class="final">
-                <span class="finalcont">083/269 u</span>
-                <div class="final2">
-                    <span class="finalcont">DOM/EN DOMATO GIONCOLA</span>
-                    <span class="finalcont">™ & © 2018 Wizards of the Coast</span>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    
+   
     <script>
-        const jsonCards = "[{\"name\":\"Serra Angel\",\"image\":\"static/img/serraangel.png\",\"manaCost\":3,\"typeLine\":\"Creature - Angel\",\"expansionSymbol\":\"static/img/serraangelexpansionsymbol.png\",\"hability\":\"Flying, vigilance\",\"text\":\"The angel remembers her past lives like dreams. Her song held up meadows. Her blade darkness. Her wings carried her across the ages.\",\"power\":\"4/4\",\"collectorNumber\":\"033/269 U\"},{\"name\":\"Brainstorm\",\"image\":\"\",\"manaCost\":4,\"typeLine\":\"Instant\",\"expansionSymbol\":\"static/img/kokushoexpansionsymbol.png\",\"hability\":\"Flying<br>When Kokusho, the Evening Star dies, each opponent loses 5 life. You gain life equal to the life lost this way.\",\"text\":\"The fall of the evening star never heralds a gentle dawn.\",\"power\":\"5/5\",\"collectorNumber\":\"095/249 R\"}]"   
+        const jsonCards = "[{\"name\":\"Serra Angel\",\"image\":\"static/img/serraangel.png\",\"manaCost\":3,\"typeLine\":\"Creature - Angel\",\"expansionSymbol\":\"static/img/serraangelexpansionsymbol.png\",\"hability\":\"Flying, vigilance\",\"text\":\"The angel remembers her past lives like dreams. Her song held up meadows. Her blade darkness. Her wings carried her across the ages.\",\"power\":\"4/4\",\"collectorNumber\":\"033/269 U\"},{\"name\":\"Brainstorm\",\"image\":\"static/img/kokusho.png\",\"manaCost\":4,\"typeLine\":\"Instant\",\"expansionSymbol\":\"static/img/kokushoexpansionsymbol.png\",\"hability\":\"Flying<br>\",\"text\":\"When Kokusho, the Evening Star dies, each opponent loses 5 life. You gain life equal to the life lost this way. The fall of the evening star never heralds a gentle dawn.\",\"power\":\"5/5\",\"collectorNumber\":\"095/249 R\"}]"   
         dicionarios = JSON.parse(jsonCards)
+        let custo_mana = 0
         for (let d of dicionarios){
-            console.log(d.name)
+            console.log(d.manaCost)
+            if(d.manaCost == 3){
+                custo_mana = ']'
+            } else if (d.manaCost == 4){
+                custo_mana = '^'
+            }
+            let corpo = document.querySelector("body")
+            corpo.innerHTML +=  `<div class="carta">`+
+                    `<div class="borda">`+
+                    `<div class="corpo">`+
+                        `<div class="header">`+
+                            `<div class="bordaext"> `+
+                            `<p class="titulo" id="tituloPrincipal">${d.name}</p>`+
+                            `<div class="elementos">`+
+                                `<span style="font-size: 150%;" id="mana">${custo_mana}</span>`+
+                                `<img class="mana2" src="static/img/manacost.png">`+
+                                `<img class="mana2" src="static/img/manacost.png">`+
+                            `</div>`+
+                        `</div>`+
+                        `</div>`+
+                        `<div class="imagem" style="background-image: url(${d.image})"><p></p></div>`+
+                        `<div class="type">`+
+                            `<div class="bordaext"> `+
+                                `<p class="titulo" id="tipoCriatura">${d.typeLine}</p>`+
+                                `<img src="${d.expansionSymbol}" class="imgs">`+
+                            `</div>`+
+                        `</div>`+
+                        `<div class="descricao">`+
+                            `<h3 class="titulo" id="tituloDescricao">${d.hability}</h3>`+
+                            `<hr>`+
+                            `<p class="conteudo" id="textoConteudo">${d.text}</p>`+
+                            `<div class="numcont"></div>`+
+                        `</div>`+
+                    `</div>`+
+                        `<div class="power">`+
+                            `<div class="branco">`+
+                                `<div class="num"><p class="par">${d.power}</p></div>`+
+                            `</div>`+
+                        `</div>`+
+                        `<div class="footer"></div>`+
+                        `<div class="final">`+
+                            `<span class="finalcont">${d.collectorNumber}</span>`+
+                            `<div class="final2">`+
+                                `<span class="finalcont">DOM/EN DOMATO GIONCOLA</span>`+
+                                `<span class="finalcont">™ & © 2018 Wizards of the Coast</span>`+
+                            `</div>`+
+                        `</div>`+
+                    `</div>`+
+                `</div>`
         }
+
+
 </script>
 </body>
 </html>
